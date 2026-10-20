@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RAMS Attendance System</title>
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 40px;
+                background-color: #f4f4f4;
+            }
+
+            .container {
+                background: white;
+                padding: 20px;
+                border-radius: 10px;
+                max-width: 700px;
+                margin: auto;
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            input {
+                padding: 10px;
+                width: 250px;
+            }
+
+            button {
+                padding: 10px;
+                margin: 5px;
+                cursor: pointer;
+            }
+
+            table {
+                width: 100%;
+                margin-top: 20px;
+                border-collapse: collapse;
+            }
+
+            table, th, td {
+                border: 1px solid black;
+            }
+
+            th, td {
+                padding: 10px;
+                text-align: center;
+            }
+
+            .clockin {
+                background-color: green;
+                color: white;
+            }
+
+            .clockout {
+                background-color: red;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="container">
+        
+            <h1> Robotics Attendance Management System</h1>
+
+            <h3>Student Attendance</h3>
+
+            <input type="text" id="studentName" placeholder="Enter Student Name">
+
+            <button class="clockin" onclick = "clockIn()"> Clock In
+            </button>
+
+            <button class="clockout" onclick = "clockOut()"> Clock Out
+            </button>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Clock In</th>
+                        <th>Clock Out</th>
+                    </tr>
+                </thead>
+
+                <tbody id="attendanceTable"></tbody>
+            </table>
+
+        </div>
+        <script>
+
+            let attendance = [];
+
+            function clockIn(){
+                const name = document,getElementById("studentName").value;
+
+                if(name === ""){
+                    alert("Enter a student name.");
+                    return;
+                }
+
+                attendance.push({
+                    student: name,
+                    clockIn: new Date().toLocaleTimeString(),
+                    ClockOut: "-"
+                });
+
+                updateTable();
+            }
+
+            function clockOut(){
+                const name = document.getElementById("studentName").value;
+
+                for(let i = attendance.length - 1; i > 0; i--){
+                    if(attendance[i].student === name &&
+                        attendance[i].clockOut === "-"){
+                            attendance[i].clockOut = new Date().toLocaleTimeString();
+                            break;
+                        }
+                }
+
+                updateTable();
+            }
+
+            function updateTable(){
+                let table = document,getElementById("attendanceTable");
+
+                table.innerHTML = "";
+
+                attendance.forEach(record => {
+
+                    let row =
+                    <tr> 
+                        <td>${record.student}</td>
+                        <td>${record.clockIn}</td>
+                        <td>${record.clockOut}</td>
+                    </tr>
+                    ;
+
+                    table.innerHTML += row;
+                });
+            }
+
+        </script>
+    </body>
+</html>
