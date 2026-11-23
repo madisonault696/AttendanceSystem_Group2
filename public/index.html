@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101d32">
+  <title>RAM — Robotics Attendance Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <main id="loginView" class="login-screen">
+    <section class="login-brand-panel">
+      <div class="brand-lockup"><div class="brand-symbol">R<span>A</span>M</div><div><b>RAM</b><small>ROBOTICS ATTENDANCE MANAGEMENT</small></div></div>
+      <div class="brand-message">
+        <div class="overline"><span class="live-dot"></span> ROBOTICS PROGRAM WORKSPACE</div>
+        <h1>Every session<br><em>moves us forward.</em></h1>
+        <p>A clear, reliable way to record participation, track hours, and keep your robotics program moving.</p>
+      </div>
+      <div class="brand-footer"><span>ATTENDANCE · ACCOUNTABILITY · PROGRESS</span><span>CNIT 315 · GROUP 2</span></div>
+      <div class="orb orb-one"></div><div class="orb orb-two"></div>
+    </section>
+    <section class="login-form-panel">
+      <div class="login-form-wrap">
+        <div class="mobile-brand"><div class="brand-symbol">R<span>A</span>M</div><b>RAM Workspace</b></div>
+        <div class="form-heading"><span class="eyebrow">WELCOME BACK</span><h2>Sign in to RAM</h2><p>Enter your account details to continue.</p></div>
+        <form id="loginForm" class="form-stack">
+          <label for="loginEmail">Email address</label>
+          <div class="input-wrap"><span class="field-icon">✉</span><input id="loginEmail" name="email" type="email" placeholder="name@school.edu" autocomplete="username" required></div>
+          <label for="loginPassword">Password</label>
+          <div class="input-wrap"><span class="field-icon">⌑</span><input id="loginPassword" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" required><button class="password-toggle" type="button" id="togglePassword" aria-label="Show password">Show</button></div>
+          <p id="loginError" class="form-error" aria-live="polite"></p>
+          <button class="button button-primary button-wide" type="submit"><span>Sign in to your workspace</span><span>↗</span></button>
+        </form>
+        <div class="demo-credentials"><div class="demo-title"><span>DEMO ACCESS</span><span class="demo-tag">CLASS PROJECT</span></div><button type="button" class="demo-account" data-demo="manager"><span class="demo-avatar manager-avatar">M</span><span><b>Manager account</b><small>manager@ram.local</small></span><span class="demo-use">Use account ↗</span></button><button type="button" class="demo-account" data-demo="student"><span class="demo-avatar student-avatar">S</span><span><b>Student account</b><small>student@ram.local</small></span><span class="demo-use">Use account ↗</span></button><p>Demo password: <strong>Manager123!</strong> or <strong>Student123!</strong></p></div>
+        <p class="login-footnote">For classroom demonstration only · Do not enter real personal information</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="appView" class="app-shell hidden">
+    <aside class="sidebar">
+      <div class="sidebar-brand"><div class="brand-symbol small">R<span>A</span>M</div><div><b>RAM Workspace</b><small>ROBOTICS PROGRAM</small></div></div>
+      <div class="sidebar-section-label">WORKSPACE</div>
+      <nav id="nav" class="nav-list" aria-label="Main navigation"></nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-help"><span class="help-icon">✳</span><div><b>Stay on track</b><small>Your attendance, all in one place.</small></div></div>
+        <div class="sidebar-profile"><div id="avatar" class="profile-avatar">U</div><div class="profile-meta"><b id="sideName">User</b><small id="sideRole">Role</small></div><button id="logoutBtn" class="logout-button" title="Sign out" aria-label="Sign out">↪</button></div>
+      </div>
+    </aside>
+    <section class="main-area">
+      <header class="topbar"><div class="breadcrumb"><span>RAM</span><span class="crumb-slash">/</span><b id="pageTitle">Dashboard</b></div><div class="topbar-right"><div class="system-status"><span class="live-dot"></span> System online</div><div class="topbar-divider"></div><div class="top-user"><span id="topName">User</span><span id="topAvatar" class="top-avatar">U</span></div></div></header>
+      <main id="content" class="content" tabindex="-1"></main>
+      <footer class="app-footer"><span>RAM · Robotics Attendance Management</span><span>CNIT 315 Semester Project · Group 2</span></footer>
+    </section>
+  </div>
+
+  <dialog id="studentDialog" class="modal">
+    <form id="studentForm" class="modal-form">
+      <div class="modal-heading"><div><span class="eyebrow">STUDENT DIRECTORY</span><h2 id="studentDialogTitle">Add student</h2><p>Enter the student's account information below.</p></div><button type="button" class="modal-close" id="closeStudentDialog" aria-label="Close">×</button></div>
+      <input type="hidden" name="id">
+      <div class="form-grid"><div class="form-field full"><label for="studentName">Full name</label><input id="studentName" name="name" maxlength="100" placeholder="e.g. Taylor Morgan" required></div><div class="form-field"><label for="studentEmail">Email address</label><input id="studentEmail" name="email" type="email" placeholder="student@school.edu" required></div><div class="form-field"><label for="studentNumber">Student number <span class="optional">Optional</span></label><input id="studentNumber" name="studentNumber" maxlength="30" placeholder="ROB-1003"></div><div id="passwordField" class="form-field full"><label for="studentPassword">Temporary password</label><input id="studentPassword" name="password" type="password" minlength="8" placeholder="At least 8 characters"><small>Use at least 8 characters for the demo account.</small></div></div>
+      <p id="studentFormError" class="form-error"></p><div class="modal-actions"><button type="button" class="button button-light" id="cancelStudent">Cancel</button><button type="submit" class="button button-primary">Save student <span>↗</span></button></div>
+    </form>
+  </dialog>
+  <script src="app.js"></script>
+</body>
+</html>
