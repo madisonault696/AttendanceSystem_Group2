@@ -2,6 +2,8 @@
 
 A polished, desktop-first attendance management prototype for the CNIT 315 Group 2 semester project.
 
+*NOTICE: The use of ChatGPT was used to help guide programming.*
+
 ## What is included
 
 ### Student workspace
